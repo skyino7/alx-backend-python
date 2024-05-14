@@ -3,18 +3,7 @@
 
 import unittest
 from parameterized import parameterized
-
-
-def access_nested_map(nested_map, path):
-    """
-    Access nested map
-    """
-    for key in path:
-        if key in nested_map:
-            nested_map = nested_map[key]
-        else:
-            return None
-    return nested_map
+from typing import Dict, Any, Tuple
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -27,7 +16,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({'a': {'b': 2}}, ['a', 'b'], 2),
         ({'a': {}}, ['a', 'b'], None),
     ])
-    def test_access_nested_map(self, nested_map, path, expected):
+    def test_access_nested_map(self, nested_map: Dict[str, Any], path: Tuple[str], expected: Any):
         """
         Test access_nested_map Doc
         """
