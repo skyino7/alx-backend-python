@@ -13,25 +13,25 @@ class TestAccessNestedMap(unittest.TestCase):
     """
 
     @parameterized.expand([
-        ({'a': 1}, ['a'], 1),
-        ({'a': {'b': 2}}, ['a', 'b'], 2),
-        ({'a': {}}, ['a', 'b'], None),
+        ({"a": 1}, ("a",), 1),
+        ({"a": {"b": 2}}, ("a",), {"b": 2}),
+        ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
     def test_access_nested_map(self, nested_map: Dict[str, Any],
                                path: Tuple[str], expected: Any) -> None:
         """
-        Test access_nested_map Doc
+        Test access_nested_map
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
-        ({}, ['a']),
-        ({'a': 1}, ['a', 'b']),
+        ({}, ("a",)),
+        ({"a": 1}, ("a", "b")),
     ])
     def test_access_nested_map_exception(self, nested_map: Dict[str, Any],
                                          path: Tuple[str]) -> None:
         """
-        Test access_nested_map_exception Doc
+        Test access_nested_map raises KeyError
         """
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
